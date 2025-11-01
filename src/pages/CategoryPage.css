@@ -1,0 +1,29 @@
+.category-page {
+  padding: 0;
+}
+
+.category-content {
+  min-height: 400px;
+}
+
+.category-tree {
+  font-size: 14px;
+}
+
+.tree-node {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 8px;
+}
+
+.tree-node:hover .ant-btn {
+  opacity: 1;
+}
+
+.tree-node .ant-btn {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+

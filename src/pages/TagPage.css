@@ -1,0 +1,14 @@
+.tag-page {
+  padding: 0;
+}
+
+.tag-card {
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.tag-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
