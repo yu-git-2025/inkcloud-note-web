@@ -11,7 +11,7 @@ export const fetchChatMessages = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '获取聊天记录失败');
+      return rejectWithValue(error.response?.data?.msg || '获取聊天记录失败');
     }
   }
 );
@@ -28,7 +28,7 @@ export const sendMessage = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '发送消息失败');
+      return rejectWithValue(error.response?.data?.msg || '发送消息失败');
     }
   }
 );

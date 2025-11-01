@@ -94,13 +94,13 @@ const ProfilePage = () => {
         <Card>
           <Form layout="vertical">
             <Form.Item label="修改密码" name="oldPassword">
-              <Input.Password placeholder="请输入原密码" />
+              <Input.Password placeholder="请输入原密码" autoComplete="current-password" />
             </Form.Item>
             <Form.Item name="newPassword">
-              <Input.Password placeholder="请输入新密码" />
+              <Input.Password placeholder="请输入新密码" autoComplete="new-password" />
             </Form.Item>
             <Form.Item name="confirmPassword">
-              <Input.Password placeholder="请确认新密码" />
+              <Input.Password placeholder="请确认新密码" autoComplete="new-password" />
             </Form.Item>
             <Form.Item>
               <Button type="primary">修改密码</Button>

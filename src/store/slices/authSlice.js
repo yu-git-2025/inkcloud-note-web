@@ -9,7 +9,7 @@ export const sendVerificationCode = createAsyncThunk(
       const response = await api.post('/user/v1/sms/code/send', { phone });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '发送失败');
+      return rejectWithValue(error.response?.data?.msg || '发送失败');
     }
   }
 );
@@ -21,15 +21,15 @@ export const login = createAsyncThunk(
     try {
       const data = code ? { phone, code } : { phone, password };
       const response = await api.post('/user/v1/user/login', data);
-      if (response.data.code === 200) {
+      if (response.data.code == 200) {
         const { token, refreshToken, userId, nickname, avatar } = response.data.data;
         localStorage.setItem('token', token);
         localStorage.setItem('refreshToken', refreshToken);
         return response.data.data;
       }
-      return rejectWithValue(response.data.message || '登录失败');
+      return rejectWithValue(response.data.msg || '登录失败');
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '登录失败');
+      return rejectWithValue(error.response?.data?.msg || '登录失败');
     }
   }
 );
@@ -41,15 +41,12 @@ export const register = createAsyncThunk(
     try {
       const data = code ? { phone, code } : { phone, password };
       const response = await api.post('/user/v1/user/register', data);
-      if (response.data.code === 200) {
-        const { token, refreshToken, userId, nickname, avatar } = response.data.data;
-        localStorage.setItem('token', token);
-        localStorage.setItem('refreshToken', refreshToken);
-        return response.data.data;
+      if (response.data.code == 200) {
+        return response.data.msg;
       }
-      return rejectWithValue(response.data.message || '注册失败');
+      return rejectWithValue(response.data.msg || '注册失败');
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '注册失败');
+      return rejectWithValue(error.response?.data?.msg || '注册失败');
     }
   }
 );

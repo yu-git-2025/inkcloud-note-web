@@ -9,7 +9,7 @@ export const fetchFriends = createAsyncThunk(
       const response = await api.get('/interact/v1/friend/list');
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '获取好友列表失败');
+      return rejectWithValue(error.response?.data?.msg || '获取好友列表失败');
     }
   }
 );
@@ -22,7 +22,7 @@ export const addFriend = createAsyncThunk(
       const response = await api.post('/user/v1/friend/add', { friendPhone, remark });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '添加好友失败');
+      return rejectWithValue(error.response?.data?.msg || '添加好友失败');
     }
   }
 );
@@ -35,7 +35,7 @@ export const deleteFriend = createAsyncThunk(
       const response = await api.delete(`/interact/v1/friend/delete/${friendId}`);
       return { friendId, ...response.data };
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '删除好友失败');
+      return rejectWithValue(error.response?.data?.msg || '删除好友失败');
     }
   }
 );

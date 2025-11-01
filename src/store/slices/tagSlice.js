@@ -9,7 +9,7 @@ export const fetchTags = createAsyncThunk(
       const response = await api.get('/note/v1/tag/list');
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '获取标签列表失败');
+      return rejectWithValue(error.response?.data?.msg || '获取标签列表失败');
     }
   }
 );
@@ -22,7 +22,7 @@ export const createTag = createAsyncThunk(
       const response = await api.post('/note/v1/tag/create', tagData);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '创建标签失败');
+      return rejectWithValue(error.response?.data?.msg || '创建标签失败');
     }
   }
 );
@@ -35,7 +35,7 @@ export const updateTag = createAsyncThunk(
       const response = await api.put(`/note/v1/tag/update/${tagId}`, tagData);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '更新标签失败');
+      return rejectWithValue(error.response?.data?.msg || '更新标签失败');
     }
   }
 );
@@ -48,7 +48,7 @@ export const deleteTag = createAsyncThunk(
       const response = await api.delete(`/note/v1/tag/delete/${tagId}`);
       return { tagId, ...response.data };
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '删除标签失败');
+      return rejectWithValue(error.response?.data?.msg || '删除标签失败');
     }
   }
 );

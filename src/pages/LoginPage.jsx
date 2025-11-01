@@ -104,6 +104,7 @@ const LoginPage = () => {
                 prefix={<UserOutlined />}
                 placeholder="请输入手机号"
                 maxLength={11}
+                autoComplete="tel"
               />
             </Form.Item>
 
@@ -115,6 +116,7 @@ const LoginPage = () => {
                 <Input.Password
                   prefix={<LockOutlined />}
                   placeholder="请输入密码"
+                  autoComplete="current-password"
                 />
               </Form.Item>
             ) : (

@@ -9,7 +9,7 @@ export const fetchUserProfile = createAsyncThunk(
       const response = await api.get('/user/v1/user/profile');
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '获取用户信息失败');
+      return rejectWithValue(error.response?.data?.msg || '获取用户信息失败');
     }
   }
 );
@@ -22,7 +22,7 @@ export const updateUserProfile = createAsyncThunk(
       const response = await api.put('/user/v1/user/profile/edit', profileData);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '更新用户信息失败');
+      return rejectWithValue(error.response?.data?.msg || '更新用户信息失败');
     }
   }
 );
@@ -35,7 +35,7 @@ export const fetchUserStatistics = createAsyncThunk(
       const response = await api.get('/note/v1/statistics/overview');
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '获取统计数据失败');
+      return rejectWithValue(error.response?.data?.msg || '获取统计数据失败');
     }
   }
 );

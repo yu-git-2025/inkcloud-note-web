@@ -56,7 +56,7 @@ const RegisterPage = () => {
         })
       ).unwrap();
       message.success('注册成功');
-      navigate('/home');
+      navigate('/login', { replace: true });
     } catch (error) {
       message.error(error || '注册失败');
     }
@@ -108,6 +108,7 @@ const RegisterPage = () => {
                 prefix={<UserOutlined />}
                 placeholder="请输入手机号"
                 maxLength={11}
+                autoComplete="tel"
               />
             </Form.Item>
 
@@ -123,6 +124,7 @@ const RegisterPage = () => {
                   <Input.Password
                     prefix={<LockOutlined />}
                     placeholder="请输入密码（至少6位）"
+                    autoComplete="new-password"
                   />
                 </Form.Item>
                 <Form.Item
@@ -143,6 +145,7 @@ const RegisterPage = () => {
                   <Input.Password
                     prefix={<LockOutlined />}
                     placeholder="请确认密码"
+                    autoComplete="new-password"
                   />
                 </Form.Item>
               </>

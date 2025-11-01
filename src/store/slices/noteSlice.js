@@ -13,7 +13,7 @@ export const fetchNotes = createAsyncThunk(
       const response = await api.get('/note/v1/note/list', { params });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '获取笔记列表失败');
+      return rejectWithValue(error.response?.data?.msg || '获取笔记列表失败');
     }
   }
 );
@@ -26,7 +26,7 @@ export const createNote = createAsyncThunk(
       const response = await api.post('/note/v1/note/create', noteData);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '创建笔记失败');
+      return rejectWithValue(error.response?.data?.msg || '创建笔记失败');
     }
   }
 );
@@ -39,7 +39,7 @@ export const fetchNoteDetail = createAsyncThunk(
       const response = await api.get(`/note/v1/note/detail/${noteId}`);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '获取笔记详情失败');
+      return rejectWithValue(error.response?.data?.msg || '获取笔记详情失败');
     }
   }
 );
@@ -52,7 +52,7 @@ export const updateNote = createAsyncThunk(
       const response = await api.put(`/note/v1/note/update/${noteId}`, noteData);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '更新笔记失败');
+      return rejectWithValue(error.response?.data?.msg || '更新笔记失败');
     }
   }
 );
@@ -65,7 +65,7 @@ export const deleteNote = createAsyncThunk(
       const response = await api.delete(`/note/v1/note/delete/${noteId}`);
       return { noteId, ...response.data };
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '删除笔记失败');
+      return rejectWithValue(error.response?.data?.msg || '删除笔记失败');
     }
   }
 );
@@ -80,7 +80,7 @@ export const fetchNoteVersions = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '获取版本列表失败');
+      return rejectWithValue(error.response?.data?.msg || '获取版本列表失败');
     }
   }
 );

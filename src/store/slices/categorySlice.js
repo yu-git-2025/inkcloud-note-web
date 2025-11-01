@@ -9,7 +9,7 @@ export const fetchCategories = createAsyncThunk(
       const response = await api.get('/note/v1/category/list');
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '获取分类列表失败');
+      return rejectWithValue(error.response?.data?.msg || '获取分类列表失败');
     }
   }
 );
@@ -22,7 +22,7 @@ export const createCategory = createAsyncThunk(
       const response = await api.post('/note/v1/category/create', categoryData);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '创建分类失败');
+      return rejectWithValue(error.response?.data?.msg || '创建分类失败');
     }
   }
 );
@@ -35,7 +35,7 @@ export const updateCategory = createAsyncThunk(
       const response = await api.put(`/note/v1/category/update/${categoryId}`, categoryData);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '更新分类失败');
+      return rejectWithValue(error.response?.data?.msg || '更新分类失败');
     }
   }
 );
@@ -48,7 +48,7 @@ export const deleteCategory = createAsyncThunk(
       const response = await api.delete(`/note/v1/category/delete/${categoryId}`);
       return { categoryId, ...response.data };
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '删除分类失败');
+      return rejectWithValue(error.response?.data?.msg || '删除分类失败');
     }
   }
 );
