@@ -30,7 +30,7 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status == 401) {
       // Token 过期，尝试刷新
       const refreshToken = localStorage.getItem('refreshToken');
       if (refreshToken) {

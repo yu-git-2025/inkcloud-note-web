@@ -1,13 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../utils/api';
 
+//登录方式
+const loginType = {
+  password: 1,
+  code: 2,
+};
+
 // 发送验证码
 export const sendVerificationCode = createAsyncThunk(
   'auth/sendCode',
-  async (phone, { rejectWithValue }) => {
+  async ({phone, businessType}, { rejectWithValue }) => {
     try {
-      const response = await api.post('/user/v1/sms/code/send', { phone });
-      return response.data;
+      const response = await api.post('/user/v1/user/sms/code/send', { phone, businessType });
+      if (response.data.code == 200) { 
+        return response.data;
+      }else{
+        return rejectWithValue(response?.data?.msg || '发送失败');
+      }
     } catch (error) {
       return rejectWithValue(error.response?.data?.msg || '发送失败');
     }
@@ -19,10 +29,10 @@ export const login = createAsyncThunk(
   'auth/login',
   async ({ phone, code, password }, { rejectWithValue }) => {
     try {
-      const data = code ? { phone, code } : { phone, password };
+      const data = code ? { phone, code, loginType: loginType.code } : { phone, password, loginType: loginType.password };
       const response = await api.post('/user/v1/user/login', data);
       if (response.data.code == 200) {
-        const { token, refreshToken, userId, nickname, avatar } = response.data.data;
+        const { token, refreshToken, userId, username, nickname, avatar } = response.data.data;
         localStorage.setItem('token', token);
         localStorage.setItem('refreshToken', refreshToken);
         return response.data.data;
@@ -39,7 +49,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async ({ phone, code, password }, { rejectWithValue }) => {
     try {
-      const data = code ? { phone, code } : { phone, password };
+      const data = code ? { phone, code, loginType: loginType.code } : { phone, password, loginType: loginType.password };
       const response = await api.post('/user/v1/user/register', data);
       if (response.data.code == 200) {
         return response.data.msg;
@@ -65,6 +75,7 @@ const authSlice = createSlice({
     refreshToken: localStorage.getItem('refreshToken') || null,
     isAuthenticated: !!localStorage.getItem('token'),
     loading: false,
+    codeLoading: false,
     error: null,
   },
   reducers: {
@@ -80,13 +91,13 @@ const authSlice = createSlice({
     builder
       // 发送验证码
       .addCase(sendVerificationCode.pending, (state) => {
-        state.loading = true;
+        state.codeLoading = true;
       })
       .addCase(sendVerificationCode.fulfilled, (state) => {
-        state.loading = false;
+        state.codeLoading = false;
       })
       .addCase(sendVerificationCode.rejected, (state, action) => {
-        state.loading = false;
+        state.codeLoading = false;
         state.error = action.payload;
       })
       // 登录

@@ -12,7 +12,7 @@ const LoginPage = () => {
   const [countdown, setCountdown] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.auth);
+  const { loading, codeLoading } = useSelector((state) => state.auth);
 
   const handleSendCode = async () => {
     try {
@@ -25,7 +25,8 @@ const LoginPage = () => {
         message.error('手机号格式不正确');
         return;
       }
-      await dispatch(sendVerificationCode(phone)).unwrap();
+      const businessType = 1;
+      await dispatch(sendVerificationCode({ phone, businessType })).unwrap();
       message.success('验证码已发送');
       setCountdown(60);
       const timer = setInterval(() => {
@@ -134,6 +135,7 @@ const LoginPage = () => {
                       onClick={handleSendCode}
                       disabled={countdown > 0}
                       style={{ padding: 0 }}
+                      loading={codeLoading}
                     >
                       {countdown > 0 ? `${countdown}秒后重试` : '获取验证码'}
                     </Button>
